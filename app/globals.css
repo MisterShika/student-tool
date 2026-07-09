@@ -1,1 +1,43 @@
 @import "tailwindcss";
+
+@theme {
+  --animate-wobble-pulse: wobblePulse 3s linear infinite;
+
+  @keyframes wobblePulse {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+
+    12.5% {
+      transform: rotate(-1deg) scale(1.01);
+    }
+
+    25% {
+      transform: rotate(-2deg) scale(1.02);
+    }
+
+    37.5% {
+      transform: rotate(-1deg) scale(1.03);
+    }
+
+    50% {
+      transform: rotate(0deg) scale(1.04);
+    }
+
+    62.5% {
+      transform: rotate(1deg) scale(1.03);
+    }
+
+    75% {
+      transform: rotate(2deg) scale(1.02);
+    }
+
+    87.5% {
+      transform: rotate(1deg) scale(1.01);
+    }
+
+    100% {
+      transform: rotate(0deg) scale(1);
+    }
+  }
+}
