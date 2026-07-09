@@ -41,3 +41,25 @@
     }
   }
 }
+
+@theme {
+  --animate-color-cycle: colorCycle 4s ease-in-out infinite;
+
+  @keyframes colorCycle {
+    0%, 100% {
+      color: #2563eb;
+    }
+
+    25% {
+      color: #9333ea;
+    }
+
+    50% {
+      color: #16a34a;
+    }
+
+    75% {
+      color: #ea580c;
+    }
+  }
+}

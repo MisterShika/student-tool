@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import LoginConfirmPopup from "@/components/popups/LoginConfirmPopup";
+import "@/app/globals.css";
 
 type Student = {
   id: number;
@@ -43,34 +44,50 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <select
-        value={selectedStudent?.id ?? ""}
-        onChange={(e) => {
-          const student = students.find(
-            (s) => s.id === Number(e.target.value)
-          );
+    <div className="mt-12">
+      <div className="text-center">
+        <select
+          value={selectedStudent?.id ?? ""}
+          onChange={(e) => {
+            const student = students.find(
+              (s) => s.id === Number(e.target.value)
+            );
 
-          setSelectedStudent(student ?? null);
-        }}
-      >
-        <option value="">私は...</option>
+            setSelectedStudent(student ?? null);
+          }}
+          className="text-2xl font-[Arial] border-2 border-gray-300 rounded-md p-2"
+        >
+          <option value="">私は...</option>
 
-        {students.map((student) => (
-          <option key={student.id} value={student.id}>
-            {student.firstName} {student.lastName}
-          </option>
-        ))}
-      </select>
+          {students.map((student) => (
+            <option key={student.id} value={student.id}>
+              {student.firstName} {student.lastName}
+            </option>
+          ))}
+        </select>
+      </div>
 
-      <span>
-        {selectedStudent
-          ? `私は${selectedStudent.firstName} ${selectedStudent.lastName}です！`
-          : ""}
-      </span>
-      {selectedStudent && (
-        <button onClick={() => displayLoginConfirmPopup()}>ログイン</button>
-      )}
+      <div className="mt-6 text-4xl font-[Arial] text-center">
+        {selectedStudent ? (
+          <>
+            私は
+            <span className="font-black animate-color-cycle">
+              {selectedStudent.firstName}{selectedStudent.lastName}
+            </span>
+            です！
+          </>
+        ) : (
+          ""
+        )}
+      </div>
+
+      <div className="mt-4 text-center">
+        {selectedStudent && (
+          <button onClick={() => displayLoginConfirmPopup()} className="mt-6 text-2xl bg-emerald-500 text-white py-2 px-4 rounded-md hover:bg-emerald-600 cursor-pointer transition duration-300 font-[Arial] ">
+            ログイン
+          </button>
+        )}
+      </div>
 
       {showLoginConfirmPopup && selectedStudent && (
         <LoginConfirmPopup
