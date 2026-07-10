@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "@/app/globals.css";
+import { useRouter } from "next/navigation";
 
 type Student = {
   id: number;
@@ -19,6 +20,29 @@ export default function LoginConfirmPopup({
 }: LoginConfirmPopupProps) {
   const [inputMonth, setInputMonth] = useState("");
   const [inputDay, setInputDay] = useState("");
+  const router = useRouter();
+
+  // const handleLogin = () => {
+  //   if (!inputMonth || !inputDay) {
+  //     alert("お誕生日をえらんでね！");
+  //     return;
+  //   }
+
+  //   const birthday = new Date(student.birthday);
+
+  //   const correctMonth = birthday.getUTCMonth() + 1; // JS months are 0-11
+  //   const correctDay = birthday.getUTCDate();
+
+  //   if (
+  //     Number(inputMonth) === correctMonth &&
+  //     Number(inputDay) === correctDay
+  //   ) {
+  //     onClose();
+  //     router.push("/today");
+  //   } else {
+  //     alert("Failure");
+  //   }
+  // };
 
   const handleLogin = () => {
     if (!inputMonth || !inputDay) {
@@ -28,15 +52,20 @@ export default function LoginConfirmPopup({
 
     const birthday = new Date(student.birthday);
 
-    const correctMonth = birthday.getUTCMonth() + 1; // JS months are 0-11
+    const correctMonth = birthday.getUTCMonth() + 1;
     const correctDay = birthday.getUTCDate();
 
     if (
       Number(inputMonth) === correctMonth &&
       Number(inputDay) === correctDay
     ) {
-      alert("Success");
+      document.cookie = `session=${encodeURIComponent(
+        JSON.stringify({
+          userId: student.id,
+        })
+      )}; path=/; max-age=${5 * 60}`;
       onClose();
+      router.push("/today");
     } else {
       alert("Failure");
     }
