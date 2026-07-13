@@ -62,6 +62,7 @@ export default function LoginConfirmPopup({
       document.cookie = `session=${encodeURIComponent(
         JSON.stringify({
           userId: student.id,
+          userName: `${student.lastName}${student.firstName}`,
         })
       )}; path=/; max-age=${5 * 60}`;
       onClose();
